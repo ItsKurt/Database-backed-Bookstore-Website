@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">Welcome to Kurt's Bookstore</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">Find all the books you need here. Before you can start your search you must sign in with your login name and password or create a new account.</p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <a href="/login" type="button" class="btn btn-primary btn-lg px-4 me-sm-3">Sign In</a>
+      <a style="margin-left:20px;" type="button" href="/register"class="btn btn-secondary btn-lg px-4">Create Account</a>
+    </div>
+  </div>
+  <br>
+  <hr>
+  <h3>Check out our</h3><h2 style="color:#F5CD00">***Awarded Users***</h2>
+  <hr>
+  <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      <th scope="col">Login Name</th>
+      <th scope="col">Name</th>
+      <th scope="col">Usefulness Score</th>
+    </tr>
+  </thead>
+  {% for user in users %}
+    <tbody>
+      <tr>
+        <td><a href="../../profile/{{user['loginName']}}">{{user['loginName']}}</a></td>
+        <td>{{user['firstName']}} {{user['lastName']}}</td>
+        <td>{{user['usefulnessScore']}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}
+
+

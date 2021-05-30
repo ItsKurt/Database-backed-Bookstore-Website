@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  {% from "includes/_formhelpers.html" import render_field %}
+<div class="register container">
+    <hr>
+    <h2 style="text-align:center">Create Comment</h2>
+    <hr>
+    <form style="text-align:left" action="" method="post" autocomplete="off">
+        <div class="form-group">
+            {{render_field(form.bookRating, class="form-control")}}
+        </div>
+        <div class="form-group">
+            {{render_field(form.text, class="form-control", id="editor")}}
+        </div>
+        <p><input type="submit" class="btn btn-primary" value="Post"></p>
+    </form>
+    </div>
+{% endblock %}

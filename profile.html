@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    {% if session['loginName'] != name['loginName'] %}
+    <a style="align-content: center" href="/profile/{{name['loginName']}}.trusted/" class="btn btn-outline-success btn-sm px-4" value="trust">Mark As Trusted</a>
+    <a style="align-content: center" href="/profile/{{name['loginName']}}.untrusted/" class="btn btn-outline-danger btn-sm px-4" value="untrust">Mark As Un-Trusted</a>
+    {% else %}
+    <a style="align-content: center" href="/changePassword/{{name['loginName']}}/" class="btn btn-outline-success btn-sm px-4" value="password">Change Password</a>
+    {% endif %}
+    <hr>
+    {% if name['awarded'] %}
+    <h5 style="color:#F5CD00">***Awarded User***</h5>
+    {% endif %}
+    <h1>{{name['firstName']}} {{name['lastName']}}'s Profile Page</h1>
+    <p>@{{name['loginName']}}</p>
+  </div>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <a style="margin-left:20px;" type="button" href="/comments/{{name['loginName']}}"class="btn btn-primary btn-lg px-4">Comments</a>
+      {% if session['loginName'] == name['loginName'] or session['isManager'] %}
+      <a style="margin-left:20px;" type="button" href="/orders/{{name['loginName']}}/" class="btn btn-primary btn-lg px-4">Order History</a>
+      <a style="margin-left:20px;" type="button" href="/user_info/{{name['loginName']}}/" class="btn btn-primary btn-lg px-4">User's Info</a>
+      <a style="margin-left:20px;" type="button" href="/user_books/{{name['loginName']}}/" class="btn btn-primary btn-lg px-4">User's Books</a>
+      {% endif %}
+      <a style="margin-left:20px;" type="button" href="/trusts/{{name['loginName']}}/"class="btn btn-primary btn-lg px-4">Trusted/Untrusted Users</a>
+    </div>
+</div>
+{% endblock %}

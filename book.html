@@ -1,0 +1,89 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<hr>
+<div style='text-align: right;' class="container">
+<a style='justify-content:center;' class="btn btn-outline-dark" type="button" href="/requests/{{book['isbn']}}/">Request More Copies of this Book</a>
+</div>
+    <div class="container">
+        <h1 style="text-align:center">{{book['title']}}</h1>
+        <br>
+{% if session['isManager'] %}
+<form action="" method="POST">
+      <div class="form-inline">
+        <div style='text-align: center;'class="col-xs-2">
+          <label for="floatingInput"><b>Add More Copies:</b></label>
+        <input type="text" class="form-control input-sm" id="floatingInput" placeholder="Number of books" name="stock" required>
+          <button class="btn btn-m btn-primary" type="submit">Submit</button>
+        </div>
+      </div>
+      </form>
+        {% endif %}
+        <hr>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><b>Rating (1-10): </b>{{book_rating}}</li>
+          <li class="list-group-item"><b>Author(s):</b> {{book_authors}}</li>
+          <li class="list-group-item"><b>Subject:</b> {{book['subject']}}</li>
+          <li class="list-group-item"><b>Language:</b> {{book['language']}}</li>
+          <li class="list-group-item"><b>Number of Pages:</b> {{book['numPages']}}</li>
+          <li class="list-group-item"><b>Publisher:</b> {{book['publisher']}}</li>
+          <li class="list-group-item"><b>Publication Date:</b> {{book['publicationDate']}}</li>
+          <li class="list-group-item"><b>ISBN:</b> {{book['isbn']}}</li>
+          <li class="list-group-item"><b>Price:</b> ${{book['price']}}</li>
+            {% if book['stockLevel'] == 0 %}
+          <h3>OUT OF STOCK</h3>
+            {% endif %}
+        </ul>
+      <br>
+        {% if book['stockLevel'] != 0 %}
+      <form action="" method="POST">
+      <div class="form-inline">
+        <div class="col-xs-2">
+          <label for="floatingInput"><b>Copies Wanted:</b></label>
+        <input type="text" class="form-control input-sm" id="floatingInput" placeholder="Max of ({{book['stockLevel']}})" name="copies" required>
+          <button class="btn btn-m btn-primary" type="submit">Add to Cart</button>
+        </div>
+      </div>
+      </form>
+        {% endif %}
+    </div>
+
+<div class="container justify-content-center mt-5 border-left border-right">
+   <a class="btn btn-outline-info" type="button" href="/add_comment/{{book['isbn']}}/">Write a Comment</a>
+    <hr>
+   <form action="" method="POST">
+      <div class="form-inline">
+        <div class="col-xs-2">
+          <label for="floatingInput"><b>Top n useful comments:</b></label>
+          <input type="text" size='20' class="form-control input-sm" id="floatingInput" placeholder="# Comments" name="count">
+          <button class="btn btn-m btn-primary" type="submit" value="submit">Search</button>
+        </div>
+      </div>
+      </form>
+    <hr>
+    {% for comment in comments %}
+    <div class="d-flex justify-content py-2">
+        <div><span class="text2"><h5>Book Rating: {{comment['bookRating']}}</h5></span>
+            <hr>
+        <div class="second py-2 px-2"> <span class="text1">{{comment['c_text']}}</span></div>
+
+            <hr>
+            <div class="d-flex justify-content-between py-1 pt-2">
+                <div><span class="text2"><a href="/profile/{{comment['creator']}}">@{{comment['creator']}}</a></span></div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-white">
+                    <div class="d-flex flex-row fs-12">
+                        <div class="like p-2 cursor"><i class="fa fa-thumbs-o-up"></i><span class="ml-1"><b>Give Comment Rating:</b></span>
+                            <p><a href="/c_usefulness/{{comment['commentID']}}.useless"> Useless</a> = {{comment['useless']}}     <a href="/c_usefulness/{{comment['commentID']}}.usefull">Useful</a> = {{comment['useful']}}       <a href="/c_usefulness/{{comment['commentID']}}.v_usefull">Very Useful</a> = {{comment['v_useful']}}</p></div>
+                    </div>
+        {% if session['loginName'] == comment['creator'] %}
+        <a href="/edit_comment/{{comment['commentID']}}" type="button" class="btn btn-outline-primary btn-sm px-2 me-sm-3">Edit Comment</a>
+        <a href="/delete_comment/{{comment['commentID']}}" type="button" class="btn btn-outline-danger btn-sm px-2 me-sm-3">Delete Comment</a>
+        {% endif %}
+                </div>
+    <hr>
+  {% endfor %}
+</div>
+{% endblock %}

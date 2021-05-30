@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+    <br>
+  <h1> Book Requests:</h1>
+  <p>When copies are added for the requested book, all requests corresponding to that book will be deleted automatically.</p>
+  <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+        <th scope="col">User</th>
+      <th scope="col">Book</th>
+      <th scope="col">Date Requested</th>
+    </tr>
+  {% for request in requests %}
+    </thead>
+    <tbody>
+      <tr>
+          <td><a href="../../profile/{{request['user']}}">{{request['user']}}</a></td>
+        <td><a href="../../books/{{request['book']}}">{{request['book']}}</a></td>
+        <td>{{request['date_requested']}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

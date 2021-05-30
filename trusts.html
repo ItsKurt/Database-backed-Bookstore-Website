@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+    <br>
+  <h1>Trusted/Un-Trusted Users:</h1>
+  <br>
+  <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      <th scope="col">User</th>
+      <th scope="col">Trusted/Un-Trusted</th>
+      <th scope="col">Remove Trust/Un-Trust</th>
+    </tr>
+  {% for trust in trusts %}
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="../../profile/{{trust['trustee']}}">{{trust['trustee']}}</a></td>
+          {% if trust['isTrusted'] %}
+          <td>Trusted</td>
+          {% else %}
+          <td>Un-Trusted</td>
+          {% endif %}
+        <td><a href="/remove_trust/{{trust['truster']}}.{{trust['trustee']}}" type="button" class="btn btn-danger btn-sm px-4 me-sm-3">Remove Trust/Un-Trust</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

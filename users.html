@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+  <hr>
+
+   <form action="" method="POST">
+      <div class="form-inline">
+        <div class="col-xs-2">
+          <label for="floatingInput"><b>Search top Users By:</b></label>
+          <input type="text" size='20' class="form-control input-sm" id="floatingInput" placeholder="# Users" name="count">
+          <select id="" name="category">
+            <option value="trust">Most Trusted</option>
+            <option value="useful">Most Useful</option>
+          </select>
+          <button class="btn btn-m btn-primary" type="submit" value="submit">Search</button>
+        </div>
+      </div>
+      </form>
+<hr>
+  <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      <th scope="col">Login Name</th>
+      <th scope="col">Name</th>
+      <th scope="col">Usefulness</th>
+      <th scope="col">Trust Score</th>
+        <th scope="col">User Type</th>
+        <th scope="col">Promotion/Demotion</th>
+      <th scope="col">Award</th>
+    </tr>
+  </thead>
+  {% for user in users %}
+
+    <tbody>
+      <tr>
+        <td><a href="../../profile/{{user['loginName']}}">{{user['loginName']}}</a></td>
+        <td>{{user['firstName']}} {{user['lastName']}}</td>
+        <td>{{user['usefulness']}}</td>
+          <td>{{user['trustScore']}}</td>
+        {% if user['isManager'] %}
+          <td>Manager</td>
+        {% else %}
+        <td>Customer</td>
+        {% endif %}
+        {% if user['isManager'] %}
+        <td><a href="/promote/{{user['loginName']}}" type="button" class="btn btn-danger btn-sm px-4 me-sm-3">Demote from Manager</a></td>
+        {% else %}
+          <td><a href="/promote/{{user['loginName']}}" type="button" class="btn btn-success btn-sm px-4 me-sm-3">Promote to Manager</a></td>
+        {% endif %}
+        {% if user['awarded'] %}
+        <td><a href="/award/{{user['loginName']}}" type="button" class="btn btn-secondary btn-sm px-4 me-sm-3">Award User</a></td>
+        {% else %}
+        <td><a href="/award/{{user['loginName']}}" type="button" class="btn btn-warning btn-sm px-4 me-sm-3">Award User</a></td>
+        {% endif %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

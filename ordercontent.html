@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+  <br>
+  <h1> Order #{{orderID}} Details:</h1>
+  <br>
+  <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      <th scope="col">Book Title</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Price</th>
+      <th scope="col">Copies</th>
+    </tr>
+  {% for item in order %}
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="../../books/{{item['isbn']}}">{{item['title']}}</a></td>
+        <td>{{item['isbn']}}</td>
+        <td>${{item['price']}}</td>
+        <td>{{item['copies']}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  <h4>Total Price: ${{total_price}}</h4>
+</div>
+{% endblock %}

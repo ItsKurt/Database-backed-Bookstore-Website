@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head><title>
+    Untitled Page
+</title><link href="styles/bootstrap.css" rel="stylesheet" />
+   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="JavaScript/html5shiv.js"></script>
+      <script src="JavaScript/respond.min.js"></script>
+    <![endif]-->
+</head>
+ <body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Kurt's Bookstore</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/profile/{{session['loginName']}}">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/books">Search Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/recommended_books/{{session['loginName']}}" tabindex="-1" >Recommended Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/DOS_search" tabindex="-1" >Degrees of Separation Book Search</a>
+        </li>
+      </ul>
+    </div>
+    <ul class = 'navbar-right nav navbar-nav'>
+      <li> <a class="btn btn-warning" type="button" href="/cart/{{session['loginName']}}">Shopping Cart </a></li>
+      {% if session['isManager'] %}
+      <li> <a style="margin-left:10px;" class="btn btn-info" type="button" href="/manager">Admin Page</a></li>
+      {% endif %}
+     <li> <a style="margin-left:10px;" class="btn btn-success" type="button" href="/logout">Logout</a></li>
+    </ul>
+  </div>
+</nav>

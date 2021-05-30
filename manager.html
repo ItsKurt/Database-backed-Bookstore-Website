@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="px-4 py-5 my-5 text-center">
+  <h1 class="display-5 fw-bold">Hello {{name}} Welcome to the Admin Page</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">Find all the books you need here. Before you can start your search you must sign in with your login name and password or create a new account.</p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <a style="margin-left:20px;" type="button" href="/users" class="btn btn-primary btn-lg px-3">User Stats</a>
+      <a style="margin-left:20px;" type="button" href="/requests" class="btn btn-primary btn-lg px-3">Requests</a>
+      <a style="margin-left:20px;" type="button" href="/orders/admin/" class="btn btn-primary btn-lg px-3">Orders</a>
+      <a style="margin-left:20px;" type="button" href="/add_book" class="btn btn-primary btn-lg px-3">Add a Book</a>
+      <a style="margin-left:20px;" type="button" href='/book_stats' class="btn btn-primary btn-lg px-3">Books Stats</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+

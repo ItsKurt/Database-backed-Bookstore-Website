@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+    <br>
+  <h1> Comments Posted:</h1>
+  <br>
+  <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      <th scope="col">Comment ID</th>
+      <th scope="col">Book</th>
+        <th scope="col">Book Rating</th>
+        <th scope="col">Text</th>
+        <th scope="col">'Useless' Ratings Received</th>
+        <th scope="col">'Useful' Ratings Received</th>
+        <th scope="col">'Very Usefull' Ratings Received</th>
+        <th scope="col">Date Posted</th>
+    </tr>
+  {% for comment in comments %}
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="../../books/{{comment['book']}}">{{comment['commentID']}}</a></td>
+        <td>{{comment['title']}}</td>
+          <td>{{comment['bookRating']}}</td>
+          <td>{{comment['c_text']}}</td>
+          <td>{{comment['useless']}}</td>
+          <td>{{comment['useful']}}</td>
+          <td>{{comment['v_useful']}}</td>
+          <td>{{comment['c_date']}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

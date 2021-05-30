@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+  <hr>
+   <form action="" method="POST">
+      <div class="form-inline">
+        <div class="col-xs-2">
+          <label for="floatingInput"><b>Search Book Statistics:</b></label>
+          <input type="text" size='20' class="form-control input-sm" id="floatingInput" placeholder="Default: Top 50" name="count">
+          <select id="" name="category">
+            <option value="books">Most Popular Books</option>
+            <option value="authors">Most Popular Authors</option>
+              <option value="publishers">Most Popular Publishers</option>
+          </select>
+          <button class="btn btn-m btn-primary" type="submit" value="submit">Search</button>
+        </div>
+      </div>
+      </form>
+<hr>
+    {% if category == 'books' %}
+  <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Copies Sold</th>
+      <th scope="col">Stock Level</th>
+    </tr>
+  </thead>
+  {% for book in stats %}
+    <tbody>
+      <tr>
+        <td><a href="books/{{book['isbn']}}">{{book['title']}}</a></td>
+        <td>{{book['isbn']}}</td>
+        <td>{{book['copiesSold']}}</td>
+        <td>{{book['stockLevel']}}</td>
+      </tr>
+
+  {% endfor %}
+    </tbody>
+</table>
+  {% endif %}
+
+    {% if category == 'authors' %}
+        <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Books Sold by Author</th>
+    </tr>
+  </thead>
+  {% for author in stats %}
+    <tbody>
+      <tr>
+        <td>{{author[0]}}</td>
+        <td>{{author[1]}}</td>
+      </tr>
+  {% endfor %}
+    </tbody>
+</table>
+  {% endif %}
+    {% if category == 'publishers' %}
+  <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Books Sold by Publisher</th>
+    </tr>
+  </thead>
+  {% for publisher in stats %}
+    <tbody>
+      <tr>
+        <td>{{publisher[0]}}</td>
+        <td>{{publisher[1]}}</td>
+      </tr>
+  {% endfor %}
+    </tbody>
+</table>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<div class="container">
+  <hr>
+  <div style="float: left;">
+  <form action="" method="POST">
+      <div class="form-inline">
+        <div class="col-xs-2">
+<label for="floatingInput"><b>Search for Books By:</b></label>
+        <input type="text" class="form-control input-sm" id="floatingInput" placeholder="Search for Books" name="search">
+          <select id="" name="search_type">
+            <option value="title">Title</option>
+            <option value="author">Author</option>
+            <option value="publisher">Publisher</option>
+            <option value="language">Language</option>
+          </select>
+          <select id="sort" name="sort">
+            <option value="date">Sort by Publication Date</option>
+            <option value="rating">Sort by Book Rating</option>
+            <option value="trating">Sort by Trusted User Book Rating</option>
+          </select>
+          <button class="btn btn-m btn-primary" type="submit" value="submit">Search</button>
+          <hr>
+        </div>
+      </div>
+      </form>
+  </div>
+
+  <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      <th scope="col">Book Title</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Publication Date</th>
+      <th scope="col">Language</th>
+      <th scope="col">Price</th>
+    </tr>
+  {% for book in books %}
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="books/{{book['isbn']}}">{{book['title']}}</a></td>
+        {% if book['rating'] == 0 %}
+        <td>UNRATED</td>
+        {% else %}
+        <td>{{book['rating']}}</td>
+        {% endif %}
+        <td>{{book['publicationDate']}}</td>
+        <td>{{book['language']}}</td>
+        <td>${{book['price']}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

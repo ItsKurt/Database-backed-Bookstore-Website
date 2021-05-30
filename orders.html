@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+    <br>
+  <h1> Order History:</h1>
+  <br>
+  <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      {% if admin %}
+        <th scope="col">User</th>
+        {% endif %}
+      <th scope="col">OrderID</th>
+      <th scope="col">Date Ordered</th>
+    </tr>
+  {% for order in orders %}
+    </thead>
+    <tbody>
+      <tr>
+        {% if admin %}
+        <td><a href="../../profile/{{order['customer']}}">{{order['customer']}}</a></td>
+        {% endif %}
+        <td><a href="../../orders/{{order['orderID']}}">{{order['orderID']}}</a></td>
+        <td>{{order['date_ordered']}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

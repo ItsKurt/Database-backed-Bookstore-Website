@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+    <hr>
+  <h1>{{name['firstName']}} {{name['lastName']}}'s Books</h1>
+  <hr>
+  <ul class="list-group list-group-flush">
+      {% if not user_books %}
+      <h3>~~User does not own any books~~</h3>
+      {% endif %}
+      {% for book in user_books %}
+  <li class="list-group-item"><a href="/books/{{book['isbn']}}/">{{book['title']}}</a></li>
+      {% endfor %}
+</ul>
+{% endblock %}

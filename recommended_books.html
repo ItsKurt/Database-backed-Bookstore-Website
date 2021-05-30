@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+    <hr>
+    <h1>Recommended Books</h1>
+    <hr>
+<table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      <th scope="col">Book Title</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Language</th>
+      <th scope="col">Price</th>
+    </tr>
+  {% for book in books %}
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="../../books/{{book['isbn']}}">{{book['title']}}</a></td>
+        <td>{{book['isbn']}}</td>
+        <td>{{book['language']}}</td>
+        <td>${{book['price']}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

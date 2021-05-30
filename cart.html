@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class="container">
+  <br>
+  <h1> Items in your Cart:</h1>
+  <br>
+  <table class="table table-bordered table-hover">
+  <thead class="thead-info">
+    <tr>
+      <th scope="col">Book Title</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">Stock</th>
+      <th scope="col">Price</th>
+      <th scope="col">Copies</th>
+      <th scope="col">Modify</th>
+    </tr>
+  {% for item in cart %}
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="../../books/{{item['isbn']}}">{{item['title']}}</a></td>
+        <td>{{item['isbn']}}</td>
+        <td>{{item['stockLevel']}}</td>
+        <td>${{item['price']}}</td>
+        <td>{{item['copies']}}</td>
+        <td><a href="/cart/remove_{{item['isbn']}}" type="button" class="btn btn-outline-danger btn-sm px-4 me-sm-3">Remove Item</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+  <h4>Total Price: ${{total_price}}</h4>
+  <br>
+  <a href="/order/add_{{session['loginName']}}" type="button" class="btn btn-outline-success btn-lg px-4 me-sm-3">Checkout</a>
+</div>
+{% endblock %}

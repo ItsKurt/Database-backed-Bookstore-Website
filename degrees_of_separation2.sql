@@ -1,0 +1,1 @@
+SELECT DISTINCT * FROM books, authors, (SELECT DISTINCT authors.book FROM authors, (SELECT DISTINCT a2.name FROM authors a1, authors a2 WHERE a1.name = 'Stephen King' AND a1.name != a2.name AND a1.book = a2.book) AS d1 WHERE d1.name = authors.name) as d2 WHERE authors.name = d2.

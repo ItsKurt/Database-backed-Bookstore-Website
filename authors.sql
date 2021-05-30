@@ -1,0 +1,4 @@
+CREATE TABLE Authors(
+	NAME VARCHAR(70) DEFAULT "N/A",
+	book INT(13) NOT NULL,
+	PRIMARY KEY(Name, book));
